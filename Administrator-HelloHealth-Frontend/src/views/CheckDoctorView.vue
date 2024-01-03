@@ -96,6 +96,9 @@ import axios from "axios";
 import CheckDoctorForm from "../components/checkView/CheckDoctorForm.vue"
 import FancyButton from "@/components/FancyButton.vue";
 import UserInfoCardSmall from "@/components/UserInfoCardSmall.vue";
+import globalData from "@/global/global";
+const userId = globalData.userInfo.user_id;
+
 export default{
 
     components:
@@ -105,7 +108,7 @@ export default{
             CheckDoctorForm
         },
     data:()=>({
-        type_sort:{type:"unchecked"},
+        type_sort:{type:"unchecked",AdminID:userId},
         
         apply_list:[],
         checkDialogVisible:false,
@@ -114,8 +117,9 @@ export default{
     methods:
     {
         check(applydoctor_info){
-            axios.post("/api/Check/Doctor/Detail",{apply_id:applydoctor_info.apply_id})
+            axios.post("/check/api/check/doctor/detail",{apply_id:applydoctor_info.apply_id,AdminID:userId})
             .then((res)=> {
+                console.log("doc_detail"+res)
                 applydoctor_info.certification=res.data.data.certification;    
                 applydoctor_info.license=res.data.data.license; 
                 applydoctor_info.title=res.data.data.title; 
@@ -141,7 +145,7 @@ export default{
         },
         display(){
             axios
-                .post("/api/Check/Doctor/SortBy", this.type_sort)
+                .post("/check/api/check/doctor/sortBy", this.type_sort)
                 .then((res)=> {
                     this.apply_list= res.data.data.apply_list;
                      

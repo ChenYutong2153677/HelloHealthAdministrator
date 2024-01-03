@@ -22,7 +22,14 @@ export default defineConfig({
         changeOrigin: true,
         rewrite: (path) => path.replace(/^\/FlashService/, '')
 
-      }
+      },
+      '/check': {
+        //审核模块
+        target: 'http://43.143.165.4:8089',
+        //target: 'http://49.235.103.189:8070',
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/check/, '')
+      },
     }
   }
 })

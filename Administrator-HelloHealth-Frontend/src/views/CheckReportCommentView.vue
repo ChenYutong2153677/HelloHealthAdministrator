@@ -105,6 +105,8 @@ import CheckReportCommentForm from "../components/checkView/CheckReportCommentFo
 import UserInfoCardSmall from "@/components/UserInfoCardSmall.vue";
 import FancyButton from "@/components/FancyButton.vue";
 import TipTapEditorReadonly from "../components/postView/TipTapEditorReadonly.vue";
+import globalData from "@/global/global";
+const userId = globalData.userInfo.user_id;
 export default{
 
     components:
@@ -115,7 +117,7 @@ export default{
             TipTapEditorReadonly
         },
     data:()=>({
-        type_sort:{type:"unchecked"},
+        type_sort:{type:"unchecked",AdminID:userId},
         
         report_list:[],
         checkDialogVisible:false,
@@ -127,7 +129,7 @@ export default{
     methods:
     {
         check(report_info){
-            axios.post("/api/Check/Report/Detail",{report_id:report_info.report_id})
+            axios.post("/check/api/check/report/detail",{report_id:report_info.report_id,AdminID:userId})
             .then((res)=> {
                 report_info.post_id=res.data.data.post_id;
                 report_info.post_title=res.data.data.post_title;
@@ -154,7 +156,7 @@ export default{
         },
         display(){
             axios
-                .post("/api/Check/Report/SortBy", this.type_sort)
+                .post("/check/api/check/report/sortBy", this.type_sort)
                 .then((res)=> {
                     this.report_list= res.data.data.report_list;
                      
