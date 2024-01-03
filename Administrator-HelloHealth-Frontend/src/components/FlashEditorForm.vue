@@ -16,9 +16,9 @@
         >
           <el-option
               v-for="tag in tags"
-              :key="tag.tag_id"
-              :label="tag.tag_name"
-              :value="tag.tag_name"
+              :key="tag.tagId"
+              :label="tag.tagName"
+              :value="tag.tagName"
           />
         </el-select>
       </el-form-item>
@@ -53,16 +53,16 @@ export default{
     }),
     mounted(){
         
-          axios.get("/api/Flash/childTags")
+          axios.get("/FlashService/flash/childTags")
         .then(response => {
-          this.tags = response.data.data.tags;
+          this.tags = response.data.data;
         })
         .catch(error => {
           console.error(error)
         });
  
         if(this.newFlashInfo.flash_being_edited_id===-1){
-            this.$refs.editor.editor.commands.clearContent();
+            this.$refs.editor.editor.commands.clearContent();//清空编辑器
         }
         else{
             this.$nextTick(() => {
@@ -95,7 +95,7 @@ export default{
 
       this.newFlashInfo.content = this.$refs.editor.editor.getJSON();
       console.log(this.newFlashInfo.content)
-        axios.post("/api/Flash/sendFlash",
+        axios.put("/FlashService/flash",
             {
                 content: JSON.stringify(this.$refs.editor.editor.getJSON()),
                 flash_being_edited_id: this.newFlashInfo.flash_being_edited_id,
@@ -114,13 +114,6 @@ export default{
                 };
                 this.$emit('refresh',newNews)
                 console.log("116")
-                // if (newNews.id === -1) {
-                //     // 如果是新建新闻，调用 addNews
-                //     this.$refs.newsBlockListInstance.addNews(newNews);
-                // } else {
-                //     // 如果是编辑新闻，调用 updateNews
-                //     this.$refs.newsBlockListInstance.updateNews(newNews);
-                // }
                  
                 this.$refs.editor.editor.commands.clearContent();
             })

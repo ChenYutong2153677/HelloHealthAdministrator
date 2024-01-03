@@ -8,24 +8,25 @@
       <el-row class="result_title">
         <el-col >
           <el-input
-              v-model="input"
+
               class="search-box"
               placeholder="根据关键词查找新闻"
               :suffix-icon="Search"
+              @change="filteredNewsList"
+              v-model.change="this.input"
+              clearable
           />
         </el-col>
       </el-row>
       <!-- 三个 NewsBlock 组件 -->
       <ADNewsBlock
-          v-for="flash in currentNewsList"  :key="flash.id"
-          :flash_title="flash.title"
-          :flash_date="flash.time"
-          :flash_image="flash.image"
-          :flash_content="flash.content"
-          :flash_tags_list="flash.tags"
-          :flash_id="flash.id"
+          v-for="flash in currentNewsList"  :key="flash.flashId"
+          :flash_title="flash.flashTitle"
+          :flash_date="flash.flashTime"
+          :flash_image="flash.flashImage"
+          :flash_id="flash.flashId"
+          :flash_admin="flash.adminId"
           :is_editing="isEditing"
-          :flash_admin="flash.admin_id"
           @delete="handleDelete"
           @edit="onEdit"
       />
@@ -81,14 +82,14 @@ export default {
       }
     },
     filteredNewsList() {
-      if (!this.input) {
-        return this.newsList;
-      }
-      const keyword = this.input.toLowerCase();
-      return this.newsList.filter(news => news.title.toLowerCase().includes(keyword));
+        if (this.input==="") {
+            return this.newsList;
+        }else{
+            return this.newsList.filter(news => news.flashTitle.includes(this.input));
+        }
     },
-    filteredNewsListTotal() {
-      return this.filteredNewsList.length;
+      filteredNewsListTotal() {
+          return this.filteredNewsList.length;
     },
   },
   methods: {
@@ -107,17 +108,18 @@ export default {
       this.$emit('edit', flash_id, title, json, tags);
     },
     getNewsList() {
-        // 通过my来获取属于当前管理员的资讯
-      const apiUrl = this.selectedTagId
-          ? `/api/Flash/newsByTag/${this.selectedTagId}`
-          : "/api/Flash/newsByTag/-1";
-      axios.get(apiUrl,{params:{"my":!this.isEditing}})
-          .then(res => {
-              for(let news of res.data.data.newsList){
-                  news.content = JSON.parse(news.content)
-              }
-              this.newsList = res.data.data.newsList;    // 获取全部新闻列表
-          })
+
+        if(this.selectedTagId!=null) {
+            axios.get("/FlashService/flash/newsByTag/" + this.selectedTagId)
+                .then(res => {
+                    this.newsList = res.data.data;    //该标签下的全部新闻列表
+                })
+        }else{
+            axios.get("/FlashService/flash")//如果没有选择标签，后端返回全部资讯
+                .then(res => {
+                    this.newsList = res.data.data;    // 获取全部新闻列表
+                })
+        }
     },
     addNews(newNews) {
       this.newsList.push(newNews);

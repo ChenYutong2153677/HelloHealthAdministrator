@@ -4,16 +4,7 @@
 -->
 <template>
   <div class="view-wrapper">
-<!--    <div class="title">-->
-<!--        <div class="forum-title title-with-line" >-->
-<!--          新建资讯-->
-<!--        </div>-->
-<!--    </div>-->
-<!--    <el-container shadow="hover" class="news-block">-->
-<!--      <el-card class="new-card clickable" @click="onCreateFlash">-->
-<!--        <i class="fi fi-br-plus"></i>-->
-<!--      </el-card>-->
-<!--    </el-container>-->
+
     <WritePostButton @click="onCreateFlash"></WritePostButton>
     <div class="title">
         <div class="forum-title title-with-line" >
@@ -43,38 +34,6 @@
     >
     
     <FlashEditorForm v-if="dialogVisible" :NewFlashInfo="newFlashInfo"  @close-me="dialogVisible=false" @refresh="refreshList"></FlashEditorForm>
-     
-    <!-- <el-form label-width="50px" label-position="left" :model="newFlashInfo">
-      <el-form-item label="标题">
-        <el-input v-model="newFlashInfo.title" />
-      </el-form-item>
-      <el-form-item label="标签">
-        <el-select
-            class="tagSelector"
-            v-model="newFlashInfo.tags"
-            multiple
-            placeholder="选择1~4个标签"
-            style="width: 100%"
-            :filterable="true"
-            :multiple-limit="4"
-        >
-          <el-option
-              v-for="tag in this.tags"
-              :key="tag.tag_id"
-              :label="tag.tag_name"
-              :value="tag.tag_name"
-          />
-        </el-select>
-      </el-form-item>
-      </el-form>
-      <TipTapEditableExpert ref="editor" />
-      <template #footer>
-            <span class="dialog-footer">
-                <el-button type="primary" @click="submitNewFlash">
-                    发布
-                </el-button>
-            </span>
-      </template> -->
     </el-dialog>
   </div>
   

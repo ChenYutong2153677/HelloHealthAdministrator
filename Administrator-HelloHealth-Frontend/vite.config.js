@@ -13,7 +13,16 @@ export default defineConfig({
       '@': fileURLToPath(new URL('./src', import.meta.url))
     }
   },
-  server:{
-    port: 5172
+
+  server: {
+    port: 5172,
+    proxy: {
+      '/FlashService' : {
+        target: 'http://49.235.103.189:8085',
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/FlashService/, '')
+
+      }
+    }
   }
 })
