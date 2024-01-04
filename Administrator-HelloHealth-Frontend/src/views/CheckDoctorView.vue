@@ -31,33 +31,33 @@
         
         <el-table-column label="申请用户" width="200" align="center">
             <template #default="scope">
-                <UserInfoCardSmall :avatar-url="scope.row.user_portrait" :user-name="scope.row.user_name" :user-id="scope.row.user_id"></UserInfoCardSmall>
+                <UserInfoCardSmall :avatar-url="scope.row.userPortrait" :user-name="scope.row.userName" :user-id="scope.row.userId"></UserInfoCardSmall>
             </template>
         </el-table-column>
 
         
         <el-table-column label="申请时间" width="200" align="center" >
             <template #default="scope">
-                <div>{{ scope.row.submit_time }}</div>
+                <div>{{ scope.row.submitTime }}</div>
             </template>
         </el-table-column>
 
         <el-table-column v-if="type_sort.type=='checked'" width="200" label="审核管理员ID" align="center">
             <template #default="scope">
-                {{ scope.row.administrator_id }}
+                {{ scope.row.administratorId }}
             </template>
         </el-table-column>
 
         <el-table-column v-if="type_sort.type=='checked'" width="200" label="审核结果及时间" align="center">
             <template #default="scope">
-                 <div v-if="scope.row.review_status=='1'" style="color: #118407a5;">
+                 <div v-if="scope.row.reviewStatus=='1'" style="color: #118407a5;">
                     通过
                  </div>
                  <div v-else style="color: #fe0000a5;">
                     不通过
                  </div>
                  <div>
-                    {{ scope.row.review_time }}
+                    {{ scope.row.reviewTime }}
                 </div>
             </template>
         </el-table-column>
@@ -96,8 +96,7 @@ import axios from "axios";
 import CheckDoctorForm from "../components/checkView/CheckDoctorForm.vue"
 import FancyButton from "@/components/FancyButton.vue";
 import UserInfoCardSmall from "@/components/UserInfoCardSmall.vue";
-import globalData from "@/global/global";
-const userId = globalData.userInfo.user_id;
+
 
 export default{
 
@@ -108,7 +107,7 @@ export default{
             CheckDoctorForm
         },
     data:()=>({
-        type_sort:{type:"unchecked",AdminID:userId},
+        type_sort:{type:"unchecked",AdminID:localStorage.getItem("adminId")},
         
         apply_list:[],
         checkDialogVisible:false,
@@ -117,7 +116,7 @@ export default{
     methods:
     {
         check(applydoctor_info){
-            axios.post("/check/api/check/doctor/detail",{apply_id:applydoctor_info.apply_id,AdminID:userId})
+            axios.post("/CheckService/api/check/doctor/detail",{apply_id:applydoctor_info.applyId,AdminID:localStorage.getItem("adminId")})
             .then((res)=> {
                 console.log("doc_detail"+res)
                 applydoctor_info.certification=res.data.data.certification;    
@@ -145,10 +144,9 @@ export default{
         },
         display(){
             axios
-                .post("/check/api/check/doctor/sortBy", this.type_sort)
+                .post("/CheckService/api/check/doctor/sortBy", this.type_sort)
                 .then((res)=> {
                     this.apply_list= res.data.data.apply_list;
-                     
                 })
 
         },

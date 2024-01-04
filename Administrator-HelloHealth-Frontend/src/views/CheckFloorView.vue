@@ -109,8 +109,7 @@ import CheckFloorForm from "../components/checkView/CheckFloorForm.vue"
 import UserInfoCardSmall from "@/components/UserInfoCardSmall.vue";
 import FancyButton from "@/components/FancyButton.vue";
 import TipTapEditorReadonly from "@/components/postView/TipTapEditorReadonly.vue";
-import globalData from "@/global/global";
-const userId = globalData.userInfo.user_id;
+
 export default{
 
     components:
@@ -121,7 +120,7 @@ export default{
             CheckFloorForm 
         },
     data:()=>({
-        type_sort:{type:"unchecked",AdminID:userId},
+        type_sort:{type:"unchecked",AdminID:localStorage.getItem("adminId")},
         
         comment_list:[],
         checkDialogVisible:false,
@@ -131,7 +130,7 @@ export default{
     methods:
     {
         check(comment_info){
-            axios.post("/check/api/check/floor/detail",{comment_id:comment_info.comment_id,AdminID:userId})
+            axios.post("/CheckService/api/check/floor/detail",{comment_id:comment_info.comment_id,AdminID:localStorage.getItem("adminId")})
             .then((res)=> {
                 comment_info.post_id=res.data.data.post_id; 
                 comment_info.floor_number=res.data.data.floor_number; 
@@ -156,10 +155,9 @@ export default{
         },
         display(){
             axios
-                .post("/check/api/check/floor/sortBy", this.type_sort)
+                .post("/CheckService/api/check/floor/sortBy", this.type_sort)
                 .then((res)=> {
                     this.comment_list= res.data.data.comment_list;
-                    console.log("comment_list"+this.comment_list)
                 })
 
         },

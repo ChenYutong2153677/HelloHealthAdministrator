@@ -129,7 +129,8 @@ export default{
             author_id:0,
             is_passed:true,
             is_blocked:false,
-            review_reason:""
+            review_reason:"",
+            AdminID:localStorage.getItem("adminId")
         },
     }),
     methods:{
@@ -139,7 +140,7 @@ export default{
             }
             console.log(this.check_info.comment_id)
             
-            axios.post("/api/Check/Floor/Submit",this.check_info)
+            axios.post("/CheckService/api/check/floor/submit",this.check_info)
             .then((res)=> {
             let responseObj = res.data;
             if(responseObj.errorCode!==200) {
