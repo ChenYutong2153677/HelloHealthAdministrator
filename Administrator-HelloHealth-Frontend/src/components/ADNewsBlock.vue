@@ -15,20 +15,10 @@
             <el-container>
                 <el-header class="flash-header">
                     <!-- 新闻标题 -->
-                    <h1 class="flash-title" @click="goFullContent"
+                    <h1 class="flash-title"
                         style="font-weight: bold;">{{ truncatedTitle }}</h1>
                     <span class="flash-date">{{ flash_date }}</span>
                 </el-header>
-                <!--        <el-main class="flash-preview">-->
-                <!--          &lt;!&ndash; 新闻预览内容 &ndash;&gt;-->
-                <!--          <p>{{ flash_display_content }}</p>-->
-                <!--        </el-main>-->
-                <!--        <el-footer class="flash-tags">-->
-                <!--          &lt;!&ndash; 新闻标签 &ndash;&gt;-->
-                <!--          <el-tag size="small"-->
-                <!--                  v-for="tag in flash_tags_list"-->
-                <!--                  :key="tag">{{ tag }}</el-tag>-->
-                <!--        </el-footer>-->
             </el-container>
         </el-container>
 

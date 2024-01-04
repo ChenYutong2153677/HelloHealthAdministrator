@@ -21,7 +21,11 @@ export default defineConfig({
         target: 'http://49.235.103.189:8085',
         changeOrigin: true,
         rewrite: (path) => path.replace(/^\/FlashService/, '')
-
+      },
+      '/spring': {
+        target: 'http://localhost:8085',
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/spring/, '')
       }
     }
   }
