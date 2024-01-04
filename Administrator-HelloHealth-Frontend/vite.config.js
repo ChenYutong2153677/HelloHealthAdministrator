@@ -22,11 +22,26 @@ export default defineConfig({
         changeOrigin: true,
         rewrite: (path) => path.replace(/^\/FlashService/, '')
       },
-      '/spring': {
-        target: 'http://localhost:8085',
+      '/CheckService': {
+        //审核模块
+        target: 'http://43.143.165.4:8089',
+        //target: 'http://49.235.103.189:8070',
         changeOrigin: true,
-        rewrite: (path) => path.replace(/^\/spring/, '')
-      }
+        rewrite: (path) => path.replace(/^\/CheckService/, '')
+      },
+      '/LoginService': {
+        //审核模块
+        target: 'http://8.130.77.190:8081',
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/LoginService/, '')
+      },
+      '/UserInfoService': {
+        //审核模块
+        target: 'http://8.130.77.190:8080',
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/UserInfoService/, '')
+      },
+>>>>>>> 59a989b267895e8920c1264b92942d054e6c13c3
     }
   }
 })

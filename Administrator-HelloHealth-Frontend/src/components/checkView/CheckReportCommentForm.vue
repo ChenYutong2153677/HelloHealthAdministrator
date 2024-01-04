@@ -2,35 +2,35 @@
     <el-form label-width="auto">
 
         <el-form-item label="发布用户:">
-            <UserInfoCardSmall :avatar-url="report_info.author_portrait" :user-name="report_info.author_name" :user-id="report_info.author_id"></UserInfoCardSmall>
+            <UserInfoCardSmall :avatar-url="report_info.authorPortrait" :user-name="report_info.authorName" :user-id="report_info.authorId"></UserInfoCardSmall>
          </el-form-item>
 
          <el-form-item label="发布时间:">
-            {{ report_info.comment_time }}
+            {{ report_info.commentTime }}
         </el-form-item>
 
         <el-form-item label="举报用户:">
-            <UserInfoCardSmall :avatar-url="report_info.user_portrait" :user-name="report_info.user_name" :user-id="report_info.user_id"></UserInfoCardSmall>
+            <UserInfoCardSmall :avatar-url="report_info.userPortrait" :user-name="report_info.userName" :user-id="report_info.userId"></UserInfoCardSmall>
          </el-form-item>
 
          <el-form-item label="举报时间:">
-            {{ report_info.report_time }}
+            {{ report_info.reportTime }}
         </el-form-item>
 
         <el-form-item label="所属帖子ID:" >
             <div>
-                {{report_info.post_id}}
+                {{report_info.postId}}
             </div>
 
-            <GoToPostLink v-if="!is_checked" :floor_number="report_info.floor_number" :post_id="report_info.post_id"></GoToPostLink>
+            <GoToPostLink v-if="!is_checked" :floor_number="report_info.floorNumber" :post_id="report_info.postId"></GoToPostLink>
         </el-form-item>
 
         <el-form-item label="所属帖子标题:"  >
-            {{report_info.post_title}}
+            {{report_info.postTitle}}
         </el-form-item>
 
         <el-form-item label="楼层所在层数:"  >
-            {{report_info.floor_number}}
+            {{report_info.floorNumber}}
         </el-form-item>
           
          <el-form-item label="举报内容:">
@@ -38,7 +38,7 @@
          </el-form-item>
 
          <el-form-item label="举报理由:">
-            {{ report_info.report_reason }}
+            {{ report_info.reportReason }}
          </el-form-item>
 
 
@@ -133,14 +133,15 @@ export default{
             report_id:0,
             is_deleted:false,
             is_blocked:false,
-            report_respond:""
+            report_respond:"",
+            AdminID:localStorage.getItem("adminId")
         },
          
     }),
     methods:{
         submit(){
              
-            axios.post("/api/Check/Report/Submit",this.check_info)
+            axios.post("/CheckService/api/check/report/submit",this.check_info)
             .then((res)=> {
             let responseObj = res.data;
             if(responseObj.errorCode!==200) {

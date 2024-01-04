@@ -166,7 +166,7 @@ export default {
       this.$router.replace("/error");
       return;
     }
-    axios.get('/api/Administrator/Details')
+    axios.get("/UserInfoService/admin/getDetails?adminId="+localStorage.getItem("adminId"))
         .then(response => {
           const responseData = response.data.data.administrator;
           this.administrator = responseData

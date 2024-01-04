@@ -145,14 +145,15 @@ export default{
             reason:"",
             doctor_title:"",
             doctor_department:"",
-            doctor_hospital_rank:""
+            doctor_hospital_rank:"",
+            AdminID:localStorage.getItem("adminId"),
         },
     }),
     methods:{
         ssubmit() {
             console.log(this.check_info)
             
-            axios.post("/api/Check/Doctor/Submit",this.check_info)
+            axios.post("/CheckService/api/check/doctor/submit",this.check_info)
             .then((res)=> {
             let responseObj = res.data;
             if(responseObj.errorCode!==200) {

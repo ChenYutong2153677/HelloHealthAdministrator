@@ -20,28 +20,28 @@
 
         <el-table-column label="发布用户" :width="display_width" align="center">
             <template #default="scope">
-                <UserInfoCardSmall :avatar-url="scope.row.author_portrait" :user-name="scope.row.author_name" :user-id="scope.row.author_id"></UserInfoCardSmall>
+                <UserInfoCardSmall :avatar-url="scope.row.authorPortrait" :user-name="scope.row.authorName" :user-id="scope.row.authorId"></UserInfoCardSmall>
             </template>
         </el-table-column>
 
         <el-table-column label="发布时间" :width="display_width" align="center">
             <template #default="scope">
                                    
-                {{ scope.row.comment_time }}
+                {{ scope.row.commentTime }}
                      
             </template>
         </el-table-column>
 
         <el-table-column label="举报用户" :width="display_width" align="center">
             <template #default="scope">
-                <UserInfoCardSmall :avatar-url="scope.row.user_portrait" :user-name="scope.row.user_name" :user-id="scope.row.user_id"></UserInfoCardSmall>
+                <UserInfoCardSmall :avatar-url="scope.row.userPortrait" :user-name="scope.row.userName" :user-id="scope.row.userId"></UserInfoCardSmall>
             </template>
         </el-table-column>
 
         <el-table-column label="举报时间" :width="display_width" align="center">
             <template #default="scope">
                                    
-                {{ scope.row.report_time }}
+                {{ scope.row.reportTime }}
                      
             </template>
         </el-table-column>
@@ -49,13 +49,13 @@
         <!--已处理-->
         <el-table-column v-if="type_sort.type=='checked'" :width="display_width" label="处理管理员ID" align="center">
             <template #default="scope">
-                {{ scope.row.administrator_id }}
+                {{ scope.row.administratorId }}
             </template>
         </el-table-column>
 
         <el-table-column v-if="type_sort.type=='checked'"  :width="display_width" label="处理时间" align="center">
             <template #default="scope">
-                {{ scope.row.report_back_time }}
+                {{ scope.row.reportBackTime }}
             </template>
         </el-table-column>
     
@@ -105,6 +105,7 @@ import CheckReportCommentForm from "../components/checkView/CheckReportCommentFo
 import UserInfoCardSmall from "@/components/UserInfoCardSmall.vue";
 import FancyButton from "@/components/FancyButton.vue";
 import TipTapEditorReadonly from "../components/postView/TipTapEditorReadonly.vue";
+
 export default{
 
     components:
@@ -115,7 +116,7 @@ export default{
             TipTapEditorReadonly
         },
     data:()=>({
-        type_sort:{type:"unchecked"},
+        type_sort:{type:"unchecked",AdminID:localStorage.getItem("adminId")},
         
         report_list:[],
         checkDialogVisible:false,
@@ -127,14 +128,14 @@ export default{
     methods:
     {
         check(report_info){
-            axios.post("/api/Check/Report/Detail",{report_id:report_info.report_id})
+            axios.post("/CheckService/api/check/report/detail",{report_id:report_info.reportId,AdminID:localStorage.getItem("adminId")})
             .then((res)=> {
-                report_info.post_id=res.data.data.post_id;
-                report_info.post_title=res.data.data.post_title;
-                report_info.floor_number=res.data.data.floor_number;
+                report_info.postId=res.data.data.postId;
+                report_info.postTitle=res.data.data.postTitle;
+                report_info.floorNumber=res.data.data.floorNumber;
                 report_info.content=res.data.data.content;
-                report_info.report_respond=res.data.data.report_respond;
-                report_info.report_reason=res.data.data.report_reason;
+                report_info.reportRespond=res.data.data.reportRespond;
+                report_info.reportReason=res.data.data.reportReason;
             })
             .then(()=>{
                  console.log(report_info);
@@ -154,7 +155,7 @@ export default{
         },
         display(){
             axios
-                .post("/api/Check/Report/SortBy", this.type_sort)
+                .post("/CheckService/api/check/report/sortBy", this.type_sort)
                 .then((res)=> {
                     this.report_list= res.data.data.report_list;
                      
