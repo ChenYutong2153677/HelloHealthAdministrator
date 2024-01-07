@@ -53,7 +53,7 @@ export default {
     }),
     mounted() {
 
-        axios.get("/spring/api/v1/flash/childTags")
+        axios.get("/spring/api/v1/flashService/flash/childTags")
             .then(response => {
                 this.tags = response.data.data;
             })
@@ -116,7 +116,7 @@ export default {
             console.log("传输的参数flash")
             console.log(flash);
 
-            axios.put("/spring/api/v1/flash",flash)
+            axios.put("/spring/api/v1/flashService/flash",flash)
                 .then(res => {
                     ElMessage.success('发送成功。');
                     this.$emit('closeMe')

@@ -110,12 +110,12 @@ export default {
     getNewsList() {
 
         if(this.selectedTagId!=null) {
-            axios.get("/spring/api/v1/flash/newsByTag/" + this.selectedTagId)
+            axios.get("/spring/api/v1/flashService/flash/newsByTag/" + this.selectedTagId)
                 .then(res => {
                     this.newsList = res.data.data;    //该标签下的全部新闻列表
                 })
         }else{
-            axios.get("/spring/api/v1/flash")//如果没有选择标签，后端返回全部资讯
+            axios.get("/spring/api/v1/flashService/flash")//如果没有选择标签，后端返回全部资讯
                 .then(res => {
                     this.newsList = res.data.data;    // 获取全部新闻列表
                 })

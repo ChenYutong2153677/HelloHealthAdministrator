@@ -58,7 +58,7 @@ export default {
     },
     mounted() { // mounted 时获取全部标签列表
 
-        axios.get("/spring/api/v1/flash/tagList")
+        axios.get("/spring/api/v1/flashService/flash/tagList")
             .then(response => {
                 this.tagList = response.data.data;
             })
