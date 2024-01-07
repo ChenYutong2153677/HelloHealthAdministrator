@@ -84,7 +84,7 @@ export default {
             }).then(() => {
                 // 确定删除
 
-                axios.delete(`/FlashService/flash/` + this.flash_id)
+                axios.delete(`/spring/api/v1/flash/` + this.flash_id)
 
                     .then(res => {
                         this.$emit('delete', this.flash_id)

@@ -17,6 +17,11 @@ export default defineConfig({
   server: {
     port: 5172,
     proxy: {
+      '/spring':{
+        target: 'http://49.235.103.189:8085',
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/spring/, '')
+      },
       '/FlashService' : {
         target: 'http://49.235.103.189:8085',
         changeOrigin: true,
@@ -41,7 +46,6 @@ export default defineConfig({
         changeOrigin: true,
         rewrite: (path) => path.replace(/^\/UserInfoService/, '')
       },
->>>>>>> 59a989b267895e8920c1264b92942d054e6c13c3
     }
   }
 })
