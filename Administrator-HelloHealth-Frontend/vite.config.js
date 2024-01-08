@@ -18,7 +18,7 @@ export default defineConfig({
     port: 5172,
     proxy: {
       '/spring':{
-        target: 'http://49.235.103.189:8085',
+        target: 'http://49.235.103.189:8070',
         changeOrigin: true,
         rewrite: (path) => path.replace(/^\/spring/, '')
       },

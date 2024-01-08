@@ -61,7 +61,7 @@ const onSubmit = async () => {
         return
     }
     //http://192.168.1.104:5144
-    let response = await axios.post("/LoginService/admin/login",loginCredential)
+    let response = await axios.post("/spring/api/v1/LoginService/admin/login",loginCredential)
     let responseObj = response.data;
     localStorage.setItem("adminId",response.data.data.adminId)
     if(responseObj.errorCode!==200){
