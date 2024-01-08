@@ -128,7 +128,12 @@ export default{
     methods:
     {
         check(report_info){
-            axios.post("/CheckService/api/check/report/detail",{report_id:report_info.reportId,AdminID:localStorage.getItem("adminId")})
+            axios.get("/spring/api/v1/CheckService/check/report/detail",{
+                params:{
+                    report_id:report_info.reportId,
+                    admin_id:localStorage.getItem("adminId")
+                }
+            })
             .then((res)=> {
                 report_info.postId=res.data.data.postId;
                 report_info.postTitle=res.data.data.postTitle;
@@ -154,12 +159,16 @@ export default{
             this.display();
         },
         display(){
-            axios
-                .post("/CheckService/api/check/report/sortBy", this.type_sort)
-                .then((res)=> {
-                    this.report_list= res.data.data.report_list;
-                     
-                })
+            axios.get("/spring/api/v1/CheckService/check/report/sortBy", {
+                params: {
+                    type: this.type_sort.type,
+                    admin_id: localStorage.getItem("adminId")
+                }
+            })
+            .then((res)=> {
+                this.report_list= res.data.data.report_list;
+                    
+            })
 
         },
         openDetail(){

@@ -130,7 +130,7 @@ export default{
             is_passed:true,
             is_blocked:false,
             review_reason:"",
-            AdminID:localStorage.getItem("adminId")
+            admin_id:localStorage.getItem("adminId")
         },
     }),
     methods:{
@@ -140,7 +140,7 @@ export default{
             }
             console.log(this.check_info.comment_id)
             
-            axios.post("/CheckService/api/check/floor/submit",this.check_info)
+            axios.post("/spring/api/v1/CheckService/check/floor/submit",this.check_info)
             .then((res)=> {
             let responseObj = res.data;
             if(responseObj.errorCode!==200) {

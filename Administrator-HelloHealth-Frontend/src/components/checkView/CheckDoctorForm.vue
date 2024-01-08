@@ -146,14 +146,14 @@ export default{
             doctor_title:"",
             doctor_department:"",
             doctor_hospital_rank:"",
-            AdminID:localStorage.getItem("adminId"),
+            admin_id:localStorage.getItem("adminId"),
         },
     }),
     methods:{
         ssubmit() {
             console.log(this.check_info)
             
-            axios.post("/CheckService/api/check/doctor/submit",this.check_info)
+            axios.post("/spring/api/v1/CheckService/check/doctor/submit",this.check_info)
             .then((res)=> {
             let responseObj = res.data;
             if(responseObj.errorCode!==200) {

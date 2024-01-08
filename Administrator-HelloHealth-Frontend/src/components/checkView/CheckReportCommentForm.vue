@@ -134,14 +134,14 @@ export default{
             is_deleted:false,
             is_blocked:false,
             report_respond:"",
-            AdminID:localStorage.getItem("adminId")
+            admin_id:localStorage.getItem("adminId")
         },
          
     }),
     methods:{
         submit(){
              
-            axios.post("/CheckService/api/check/report/submit",this.check_info)
+            axios.post("/spring/api/v1/CheckService/check/report/submit",this.check_info)
             .then((res)=> {
             let responseObj = res.data;
             if(responseObj.errorCode!==200) {

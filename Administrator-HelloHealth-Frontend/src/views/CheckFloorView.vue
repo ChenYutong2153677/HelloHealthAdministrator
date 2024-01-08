@@ -130,7 +130,12 @@ export default{
     methods:
     {
         check(comment_info){
-            axios.post("/CheckService/api/check/floor/detail",{comment_id:comment_info.comment_id,AdminID:localStorage.getItem("adminId")})
+            axios.get("/spring/api/v1/CheckService/check/floor/detail",{
+                params:{
+                    comment_id:comment_info.comment_id,
+                    admin_id:localStorage.getItem("adminId")
+                }
+            })
             .then((res)=> {
                 comment_info.post_id=res.data.data.post_id; 
                 comment_info.floor_number=res.data.data.floor_number; 
@@ -154,8 +159,12 @@ export default{
             this.display();
         },
         display(){
-            axios
-                .post("/CheckService/api/check/floor/sortBy", this.type_sort)
+            axios.get("/spring/api/v1/CheckService/check/floor/sortBy", {
+                    params:{
+                        type:this.type_sort.type,
+                        admin_id:localStorage.getItem("adminId")
+                    }
+                })
                 .then((res)=> {
                     this.comment_list= res.data.data.comment_list;
                 })

@@ -16,6 +16,7 @@
         </div>
 
     <div class="bodyTable">
+
     <el-tabs
         v-model="type_sort.type"
         
@@ -116,7 +117,12 @@ export default{
     methods:
     {
         check(applydoctor_info){
-            axios.post("/CheckService/api/check/doctor/detail",{apply_id:applydoctor_info.applyId,AdminID:localStorage.getItem("adminId")})
+            axios.get("/spring/api/v1/CheckService/check/doctor/detail",{
+                params:{
+                    apply_id:applydoctor_info.applyId,
+                    admin_id:localStorage.getItem("adminId")
+                }
+            })
             .then((res)=> {
                 console.log("doc_detail"+res)
                 applydoctor_info.certification=res.data.data.certification;    
@@ -144,7 +150,12 @@ export default{
         },
         display(){
             axios
-                .post("/CheckService/api/check/doctor/sortBy", this.type_sort)
+                .get("/spring/api/v1/CheckServive/check/doctor/sortBy", {
+                    params:{
+                        type:this.type_sort.type,
+                        admin_id:localStorage.getItem("adminId")
+                    }
+                })
                 .then((res)=> {
                     this.apply_list= res.data.data.apply_list;
                 })
