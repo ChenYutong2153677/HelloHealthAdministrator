@@ -120,7 +120,7 @@ export default{
             axios.get("/spring/api/v1/CheckService/check/doctor/detail",{
                 params:{
                     apply_id:applydoctor_info.applyId,
-                    admin_id:localStorage.getItem("adminId")
+                    //admin_id:localStorage.getItem("adminId")
                 }
             })
             .then((res)=> {
@@ -153,7 +153,7 @@ export default{
                 .get("/spring/api/v1/CheckServive/check/doctor/sortBy", {
                     params:{
                         type:this.type_sort.type,
-                        admin_id:localStorage.getItem("adminId")
+                        //admin_id:localStorage.getItem("adminId")
                     }
                 })
                 .then((res)=> {

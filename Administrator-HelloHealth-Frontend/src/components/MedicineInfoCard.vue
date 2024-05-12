@@ -74,7 +74,7 @@ export default {
             this.delete_dialog_visible = false;
         },
         deleteMedicine() {
-            axios.post('/api/Administrator/delMedicine' ,{ medicine_id:this.medicine.medicine_id})
+            axios.delete('/spring/api/v1/CheckService/check/medicine' ,{ medicine_id:this.medicine.medicine_id})
                 .then((res) => {
                     this.delete_dialog_visible = false;
                     console.log(res);

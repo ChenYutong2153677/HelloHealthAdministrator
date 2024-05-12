@@ -134,7 +134,6 @@ export default{
             is_deleted:false,
             is_blocked:false,
             report_respond:"",
-            admin_id:localStorage.getItem("adminId")
         },
          
     }),

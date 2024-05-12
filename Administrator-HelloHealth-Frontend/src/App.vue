@@ -6,7 +6,7 @@ import {ElMessage} from "element-plus";
 import loadingScreen from "@/global/loading";
 import router from "@/router";
 
-//发送请求时自动显示加载界面
+//发送请求时自动显示加载界面，不传值（例传值：axios.get(‘/api/data’, { doNotShowLoadingScreen: true })）缺省显示加载动画
 axios.interceptors.request.use((config) => {
     if(!config.doNotShowLoadingScreen)
         loadingScreen.startLoading()
@@ -21,6 +21,7 @@ axios.interceptors.response.use(function (response) {
             response: response,
             errorCode: response.data.errorCode,
             defaultHandler: (prefix) =>{
+                //如果有错误信息，就显示错误信息
                 if(response.data.message){
                     ElMessage.error((prefix ? prefix : "错误") + ": " + response.data.message)
                     return;

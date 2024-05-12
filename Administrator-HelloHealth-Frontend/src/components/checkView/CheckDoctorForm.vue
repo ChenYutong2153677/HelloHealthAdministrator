@@ -146,7 +146,7 @@ export default{
             doctor_title:"",
             doctor_department:"",
             doctor_hospital_rank:"",
-            admin_id:localStorage.getItem("adminId"),
+            // admin_id:localStorage.getItem("adminId"),
         },
     }),
     methods:{

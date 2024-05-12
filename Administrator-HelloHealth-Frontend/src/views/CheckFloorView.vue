@@ -133,7 +133,7 @@ export default{
             axios.get("/spring/api/v1/CheckService/check/floor/detail",{
                 params:{
                     comment_id:comment_info.comment_id,
-                    admin_id:localStorage.getItem("adminId")
+                    // admin_id:localStorage.getItem("adminId")
                 }
             })
             .then((res)=> {
@@ -162,7 +162,7 @@ export default{
             axios.get("/spring/api/v1/CheckService/check/floor/sortBy", {
                     params:{
                         type:this.type_sort.type,
-                        admin_id:localStorage.getItem("adminId")
+                        // admin_id:localStorage.getItem("adminId")
                     }
                 })
                 .then((res)=> {

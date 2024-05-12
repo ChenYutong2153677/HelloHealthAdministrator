@@ -248,7 +248,7 @@ export default {
                 this.medicineInfo.is_prescription_medicine = this.is_prescription_medicine ? '是' : '否';
                 console.log(this.medicineInfo.is_medical_insurance_medicine);
                 console.log(this.medicineInfo.is_prescription_medicine);
-                axios.post("/api/Administrator/modifyMedicine", this.medicineInfo)
+                axios.post("/spring/api/v1/CheckService/check/medicine", this.medicineInfo)
                     .then(response => {
                         if (response.data.data.status) {
                             ElMessage.success('修改成功');
@@ -280,7 +280,7 @@ export default {
     },
     created() {
         axios
-            .post("/api/Administrator/medicine",{medicine_id:this.$route.query.medicine_id})
+            .get("/spring/api/v1/CheckService/check/medicine",{medicine_id:this.$route.query.medicine_id})
             .then(response => {
                 if (response.data.data.status) {
                     ElMessage.success('获取药品信息成功');

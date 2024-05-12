@@ -130,7 +130,7 @@ export default{
             is_passed:true,
             is_blocked:false,
             review_reason:"",
-            admin_id:localStorage.getItem("adminId")
+            // admin_id:localStorage.getItem("adminId")
         },
     }),
     methods:{

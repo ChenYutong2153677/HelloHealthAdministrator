@@ -104,8 +104,6 @@ const getSidebarPath = () => {
     }else{
         return "/" + path[1];
     }
-
-
 }
 
 const menu = ref();
