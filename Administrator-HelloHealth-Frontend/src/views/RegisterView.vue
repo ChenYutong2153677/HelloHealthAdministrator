@@ -92,7 +92,7 @@ const onSubmit = async () => {
         isError.value = true
         return
     }
-    let response = await axios.post('/api/Register/AdminRegister', registerCredential)
+    let response = await axios.post('/spring/api/v1/admin/register', registerCredential)
     let responseObj = response.data
     if (responseObj.errorCode !== 200) {
         errorMsg.value = '错误代码' + responseObj.errorCode
@@ -152,7 +152,7 @@ const sendVerificationCode = async () => {
         }
     }, 1000);
 
-    let response = await axios.post('/spring/api/v1/admin/register', requestVertificationCode)
+    let response = await axios.post('/spring/api/v1n/register', requestVertificationCode)
     let responseObj = response.data
     if (responseObj.errorCode !== 200) {
         errorMsg.value = '错误代码' + responseObj.errorCode

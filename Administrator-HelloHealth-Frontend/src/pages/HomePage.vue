@@ -72,7 +72,7 @@ let userInfo = reactive({
 
 const isLogin = ref(false);
 
-axios.get("/UserInfoService/admin/getDetails?adminId="+localStorage.getItem("adminId")).then(async(res) =>{
+axios.get("/api/v1/userInfoService/admin/details").then(async(res) =>{
     let responseObj = res.json;
     isLogin.value = responseObj.isLogin;
     globalData.login = true;

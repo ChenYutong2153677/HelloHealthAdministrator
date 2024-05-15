@@ -166,7 +166,7 @@ export default {
       this.$router.replace("/error");
       return;
     }
-    axios.get("/UserInfoService/admin/getDetails?adminId="+localStorage.getItem("adminId"))
+    axios.get("/spring/api/v1/userInfoService/admin/details")
         .then(response => {
           const responseData = response.data.data.administrator;
           this.administrator = responseData
@@ -229,7 +229,7 @@ export default {
     save(){
       // 将修改后的管理员信息保存到数据库
       axios
-          .post('/api/Administrator/modifyAdministratorInfo',{email: this.administrator.email})
+          .put('/spring/api/v1/userInfoService/admin/info',{email: this.administrator.email})
           .then(response => {
             // 保存成功后将isEdit变量设置为false，禁用编辑模式
                 let user_info={
