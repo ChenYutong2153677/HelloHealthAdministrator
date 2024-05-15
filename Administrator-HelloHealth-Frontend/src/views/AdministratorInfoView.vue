@@ -272,7 +272,7 @@ export default {
       const formData = new FormData();
       formData.append('file', this.file);
       // 发起一个 POST 请求，将 formData 发送给后端服务器
-      axios.post("/api/UserInfo/uploadAvatar", formData)
+      axios.post("/spring/api/v1/userInfoService/avatar", formData)
           .then(response => {
             console.log(response.data);
             if(response.data.data.status == true){

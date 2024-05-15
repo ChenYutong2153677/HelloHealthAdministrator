@@ -144,7 +144,7 @@ const sendVerificationCode = async () => {
         }
     }, 1000);
 
-    axios.post('/api/Register/SendVerificationCode', requestVertificationCode)
+    axios.post('/spring/api/v1/admin/pwd', requestVertificationCode)
     .then(response=>{
         isError.value = false
         errorMsg.value = ''

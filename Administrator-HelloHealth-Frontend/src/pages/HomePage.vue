@@ -72,7 +72,7 @@ let userInfo = reactive({
 
 const isLogin = ref(false);
 
-axios.get("/api/v1/userInfoService/admin/details").then(async(res) =>{
+axios.get("/spring/api/v1/userInfoService/admin/details").then(async(res) =>{
     let responseObj = res.json;
     isLogin.value = responseObj.isLogin;
     globalData.login = true;
