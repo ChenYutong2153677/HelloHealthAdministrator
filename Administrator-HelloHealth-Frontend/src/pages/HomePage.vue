@@ -72,15 +72,10 @@ let userInfo = reactive({
 
 const isLogin = ref(false);
 
-axios.get("/spring/api/v1/userInfoService/admin/details").then(async(res) =>{
+axios.get("/api/Administrator/Details").then(async(res) =>{
     let responseObj = res.json;
-    isLogin.value = responseObj.login == undefined ? responseObj.isLogin : responseObj.login;
-    if(!isLogin.value){
-        router.push("/login");
-        return;
-    }
-    globalData.login = responseObj.login;
-    console.log(globalData.login)
+    isLogin.value = responseObj.isLogin;
+    globalData.login = true;
     globalData.userInfo = {
         user_id: responseObj.administrator.id,
         user_name: responseObj.administrator.name,

@@ -166,7 +166,7 @@ export default {
       this.$router.replace("/error");
       return;
     }
-    axios.get('/spring/api/v1/userInfoService/admin/details')
+    axios.get('/api/Administrator/Details')
         .then(response => {
           const responseData = response.data.data.administrator;
           this.administrator = responseData
@@ -229,14 +229,14 @@ export default {
     save(){
       // 将修改后的管理员信息保存到数据库
       axios
-          .put('/spring/api/v1/userInfoService/admin/info',{email: this.administrator.email})
+          .post('/api/Administrator/modifyAdministratorInfo',{email: this.administrator.email})
           .then(response => {
             // 保存成功后将isEdit变量设置为false，禁用编辑模式
                 let user_info={
                   //工号，名称，联系方式，邮箱
                   email:this.administrator.email,
                 };
-                if(response.data.success == true){
+                if(response.data.data.status == true){
                   ElMessage({
                     type: "success",
                     message: "修改成功！",
@@ -272,15 +272,15 @@ export default {
       const formData = new FormData();
       formData.append('file', this.file);
       // 发起一个 POST 请求，将 formData 发送给后端服务器
-      axios.post("/spring/api/v1/userInfoService/admin/avatar", formData)
+      axios.post("/api/UserInfo/uploadAvatar", formData)
           .then(response => {
-            console.log(response.data.data);
-            if(response.data.success == true){
+            console.log(response.data);
+            if(response.data.data.status == true){
               ElMessage.success("更改成功！");
               this.photoUpload = false;
-              this.administrator.portrait = response.data.data;
-              globalData.userInfo.avatar_url = response.data.data;
-              //location.reload()
+              this.administrator.portrait = response.data.data.url;
+              globalData.userInfo.avatar_url = response.data.data.url;
+              location.reload()
             }
             else{
               ElMessage.error("更改失败！");
