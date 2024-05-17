@@ -109,8 +109,9 @@ export default {
     getNewsList() {
         // 通过my来获取属于当前管理员的资讯
       const apiUrl = this.selectedTagId
-          ? `/api/Flash/newsByTag/${this.selectedTagId}`
-          : "/api/Flash/newsByTag/-1";
+          ? `/spring/api/v1/flash/newsByTag/${this.selectedTagId}`
+          : "/spring/api/v1/flash/newsByTag/-1";
+      console.log(apiUrl)
       axios.get(apiUrl,{params:{"my":!this.isEditing}})
           .then(res => {
               for(let news of res.data.data.newsList){

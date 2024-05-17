@@ -11,7 +11,7 @@
         </div>
 
         <el-form-item label="手机号" v-bind:class="{ error: isError }">
-            <el-input v-model="loginCredential.user_phone" @click="clearErrorBorder" type="number" step="1" min="0"/>
+            <el-input v-model="loginCredential.phoneNumber" @click="clearErrorBorder" type="number" step="1" min="0"/>
         </el-form-item>
         <el-form-item label="密码" v-bind:class="{ error: isError }">
             <el-input v-model="loginCredential.password" type="password" @click="clearErrorBorder" show-password/>
@@ -40,7 +40,7 @@ import router from "@/router";
 changeTheme("#02AFCC")
 
 const loginCredential = reactive({
-    user_phone: '',
+    phoneNumber: '',
     password: '',
 })
 
@@ -51,17 +51,17 @@ const onSubmit = async () => {
     isError.value = false;
 
     let regPhone = /^(13[0-9]|14[01456879]|15[0-35-9]|16[2567]|17[0-8]|18[0-9]|19[0-35-9])\d{8}$/
-    if(loginCredential.user_phone===''){
+    if(loginCredential.phoneNumber===''){
         errorMsg.value = "请输入手机号！"
         isError.value = true
         return
-    }else if(!regPhone.test(loginCredential.user_phone)){
+    }else if(!regPhone.test(loginCredential.phoneNumber)){
         errorMsg.value = "请输入正确的手机号！"
         isError.value = true
         return
     }
     //http://192.168.1.104:5144
-    let response = await axios.post("/api/Login/AdminLogin",loginCredential)
+    let response = await axios.put("/spring/api/v1/loginService/admin/login",loginCredential)
     let responseObj = response.data;
     if(responseObj.errorCode!==200){
         errorMsg.value = "错误代码" + responseObj.errorCode;
