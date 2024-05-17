@@ -108,18 +108,18 @@ export default {
       this.$emit('edit', flash_id, title, json, tags);
     },
     getNewsList() {
-
-        if(this.selectedTagId!=null) {
-            axios.get("/spring/api/v1/flashService/flash/newsByTag/" + this.selectedTagId)
-                .then(res => {
-                    this.newsList = res.data.data;    //该标签下的全部新闻列表
-                })
-        }else{
-            axios.get("/spring/api/v1/flashService/flash")//如果没有选择标签，后端返回全部资讯
-                .then(res => {
-                    this.newsList = res.data.data;    // 获取全部新闻列表
-                })
-        }
+        // 通过my来获取属于当前管理员的资讯
+      const apiUrl = this.selectedTagId
+          ? `/spring/api/v1/flash/newsByTag/${this.selectedTagId}`
+          : "/spring/api/v1/flash/newsByTag/-1";
+      console.log(apiUrl)
+      axios.get(apiUrl,{params:{"my":!this.isEditing}})
+          .then(res => {
+              for(let news of res.data.data.newsList){
+                  news.content = JSON.parse(news.content)
+              }
+              this.newsList = res.data.data.newsList;    // 获取全部新闻列表
+          })
     },
     addNews(newNews) {
       this.newsList.push(newNews);

@@ -166,7 +166,7 @@ export default {
       this.$router.replace("/error");
       return;
     }
-    axios.get("/spring/api/v1/userInfoService/admin/details")
+    axios.get('/spring/api/v1/userInfoService/admin/details')
         .then(response => {
           const responseData = response.data.data.administrator;
           this.administrator = responseData
@@ -236,7 +236,7 @@ export default {
                   //工号，名称，联系方式，邮箱
                   email:this.administrator.email,
                 };
-                if(response.data.data.status == true){
+                if(response.data.success == true){
                   ElMessage({
                     type: "success",
                     message: "修改成功！",
@@ -272,15 +272,15 @@ export default {
       const formData = new FormData();
       formData.append('file', this.file);
       // 发起一个 POST 请求，将 formData 发送给后端服务器
-      axios.post("/spring/api/v1/userInfoService/avatar", formData)
+      axios.post("/spring/api/v1/userInfoService/admin/avatar", formData)
           .then(response => {
-            console.log(response.data);
-            if(response.data.data.status == true){
+            console.log(response.data.data);
+            if(response.data.success == true){
               ElMessage.success("更改成功！");
               this.photoUpload = false;
-              this.administrator.portrait = response.data.data.url;
-              globalData.userInfo.avatar_url = response.data.data.url;
-              location.reload()
+              this.administrator.portrait = response.data.data;
+              globalData.userInfo.avatar_url = response.data.data;
+              //location.reload()
             }
             else{
               ElMessage.error("更改失败！");

@@ -13,16 +13,15 @@ export default defineConfig({
       '@': fileURLToPath(new URL('./src', import.meta.url))
     }
   },
-
   server: {
-    port: 5172,
     proxy: {
-      '/spring':{
-        // target: 'http://49.235.103.189:8070',
-        target: 'http://localhost:3252',
+      '/spring': {
+        //target: 'http://49.235.103.189:8070',
+        target: 'http://175.24.176.248:8070',
         changeOrigin: true,
         rewrite: (path) => path.replace(/^\/spring/, '')
-      },
-    }
+      }
+    },
+    port: 5172
   }
 })
