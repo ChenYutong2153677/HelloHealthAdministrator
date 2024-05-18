@@ -32,7 +32,7 @@
         </el-form-item>
 
         <el-form-item v-if="is_checked" label="是否通过:">
-            <span v-if="comment_info.review_status!=1">通过</span>
+            <span v-if="comment_info.review_status==1">通过</span>
             <span v-if="comment_info.review_status==0">不通过</span>
         </el-form-item>
 
