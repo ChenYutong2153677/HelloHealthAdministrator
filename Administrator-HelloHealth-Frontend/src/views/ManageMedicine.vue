@@ -34,7 +34,7 @@
         </el-card>
 
         <!--        药品卡片-->
-        <div v-for="(medicine, index) in page_list" :key="medicine.medicine_id">
+        <div v-for="(medicine, index) in page_list" :key="medicine.medicineId">
             <medicine-info-card :medicine="medicine" @deletesuccess="removeFromList(index)"></medicine-info-card>
             <br />
         </div>
@@ -125,8 +125,8 @@ export default {
             } else {
                 const searchTerm = this.normalizeSearchTerm(this.search_value);
                 this.medicine_list = this.all_medicine_list.filter((medicine) => {
-                    const normalizedChName = this.normalizeSearchTerm(medicine.medicine_ch_name);
-                    const normalizedEnName = this.normalizeSearchTerm(medicine.medicine_en_name);
+                    const normalizedChName = this.normalizeSearchTerm(medicine.medicineChName);
+                    const normalizedEnName = this.normalizeSearchTerm(medicine.medicineEnName);
                     return (
                         normalizedChName.includes(searchTerm) ||
                         normalizedEnName.includes(searchTerm)

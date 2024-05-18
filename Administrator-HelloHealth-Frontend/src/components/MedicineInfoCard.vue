@@ -3,17 +3,17 @@
         <el-card class="Medicine-Card hover-card" shadow="hover">
             <el-row>
                 <el-col :span="8">
-                    <div style="color: gray">批准文号：{{ medicine.medicine_id }}</div>
+                    <div style="color: gray">批准文号：{{ medicine.medicineId }}</div>
 <!--                    <img class="img" src="@/assets/连花清瘟.jpg">-->
-                    <img class="img" :src="medicine.medicine_image">
+                    <img class="img" :src="medicine.medicineImage">
                 </el-col>
                 <el-col :span="13">
-                    <el-row class="M_title">{{ medicine.medicine_ch_name }}（{{ medicine.medicine_en_name }}）</el-row>
-                    <div class="content">类别：{{ medicine.medicine_category }}</div>
-                    <div class="content">厂商：{{ medicine.medicine_manufacturer }}</div>
-                    <div class="content">是否医保药：{{ medicine.is_medical_insurance_medicine.includes('是') ? "是":"否"   }}</div>
-                    <div class="content">是否处方：{{ medicine.is_prescription_medicine.includes('是') ?  "是":"否"}}</div>
-                    <div class="content">适应症：{{ medicine.medicine_indications  }}</div>
+                    <el-row class="M_title">{{ medicine.medicineChName }}({{ medicine.medicineEnName }})</el-row>
+                    <div class="content">类别：{{ medicine.medicineCategory }}</div>
+                    <div class="content">厂商：{{ medicine.medicineManufacturer }}</div>
+                    <div class="content">是否医保药：{{ medicine.isMedicalInsuranceMedicine=='是' ? "是":"否"   }}</div>
+                    <div class="content">是否处方：{{ medicine.isPrescriptionMedicine=='是' ?  "是":"否"}}</div>
+                    <div class="content">适应症：{{ medicine.medicineIndications  }}</div>
                 </el-col>
                 <el-col :span="3">
                     <button class="edit fancy">
@@ -66,7 +66,7 @@ export default {
             this.$router.push({
                 path: "/ModifyMedicine",
                 query: {
-                    medicine_id: this.medicine.medicine_id,
+                    medicine_id: this.medicine.medicineId,
                 },
             });
         },
@@ -74,7 +74,7 @@ export default {
             this.delete_dialog_visible = false;
         },
         deleteMedicine() {
-            axios.delete('/spring/api/v1/CheckService/check/medicine' ,{ medicine_id:this.medicine.medicine_id})
+            axios.delete('/spring/api/v1/CheckService/check/medicine' ,{ medicine_id:this.medicine.medicineId})
                 .then((res) => {
                     this.delete_dialog_visible = false;
                     console.log(res);

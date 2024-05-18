@@ -43,7 +43,7 @@
                 </el-col>
                 <el-col :span="18">
                     <div class="input-hint">
-                        {{medicineInfo.medicine_id}}
+                        {{medicineInfo.medicineId}}
                     </div>
                 </el-col>
             </el-row>
@@ -168,22 +168,22 @@ export default {
             editingFieldKey: undefined,
             editingName: '',
             fieldInfo:[
-                {name:"药品中文名称", field:"medicine_ch_name"},
-                {name:"药品英文名称", field:"medicine_en_name"},
-                {name:"药品分类", field:"medicine_category"},
-                {name:"药品简称", field:"medicine_abbreviation"},
-                {name:"药品简介", field:"medicine_introduction"},
-                {name:"药品来源国家", field:"medicine_country"},
-                {name:"药品厂商", field:"medicine_manufacturer"},
-                {name:"药品剂型", field:"medicine_form"},
-                {name:"药品性状", field:"medicine_character"},
-                {name:"药品成分", field:"medicine_ingredient"},
-                {name:"药品有效期", field:"medicine_validityperiod"},
-                {name:"药品用法", field:"medicine_usage"},
-                {name:"药品适应症", field:"medicine_indications"},
-                {name:"药品禁忌", field:"medicine_taboo"},
-                {name:"药品贮藏方法", field:"medicine_storage"},
-                {name:"药品参考报价", field:"medicine_reference_quote"},
+                {name:"药品中文名称", field:"medicineChName"},
+                {name:"药品英文名称", field:"medicineEnName"},
+                {name:"药品分类", field:"medicineCategory"},
+                {name:"药品简称", field:"medicineAbbreviation"},
+                {name:"药品简介", field:"medicineIntroduction"},
+                {name:"药品来源国家", field:"medicineCountry"},
+                {name:"药品厂商", field:"medicineManufacturer"},
+                {name:"药品剂型", field:"medicineForm"},
+                {name:"药品性状", field:"medicineCharacter"},
+                {name:"药品成分", field:"medicineIngredient"},
+                {name:"药品有效期", field:"medicineValidityperiod"},
+                {name:"药品用法", field:"medicineUsage"},
+                {name:"药品适应症", field:"medicineIndications"},
+                {name:"药品禁忌", field:"medicineTaboo"},
+                {name:"药品贮藏方法", field:"medicineStorage"},
+                {name:"药品参考报价", field:"medicineReferenceQuote"},
             ]
         }
     },
@@ -203,7 +203,7 @@ export default {
                 }
             }).then(response => {
                 ElMessage.success("图片上传成功，请等待图片加载。")
-                this.medicineInfo.medicine_image = response.data.data.url;
+                this.medicineInfo.medicineImage = response.data.data.url;
                 this.imageUrl = response.data.data.url;
             }).catch((error)=>{
                 if(error.network) return;
@@ -219,21 +219,21 @@ export default {
         // 删除只需清空imageUrl即可
         handleRemove(file, fileList) {
             this.imageUrl = "";
-            this.medicineInfo.medicine_image=null;
+            this.medicineInfo.medicineImage=null;
         },
         check(){
             //药品中文名称、药品分类、药品厂商、药品剂型、药品成分、药品用法、药品适应症、药品禁忌、是否为处方药、是否为医保药，不可为空！
-            if(this.medicineInfo.medicine_ch_name===''||
-            this.medicineInfo.medicine_category===''||
-            this.medicineInfo.medicine_manufacturer===''||
-            this.medicineInfo.medicine_form===''||
-            this.medicineInfo.medicine_ingredient===''||
-            this.medicineInfo.medicine_usage===''||
-            this.medicineInfo.medicine_indications===''||
-            this.medicineInfo.medicine_taboo===''||
-            this.medicineInfo.is_prescription_medicine===''||
-            this.medicineInfo.is_medical_insurance_medicine===''||
-            this.medicineInfo.medicine_image===''){
+            if(this.medicineInfo.medicineChName===''||
+            this.medicineInfo.medicineCategory===''||
+            this.medicineInfo.medicineManufacturer===''||
+            this.medicineInfo.medicineForm===''||
+            this.medicineInfo.medicineIngredient===''||
+            this.medicineInfo.medicineUsage===''||
+            this.medicineInfo.medicineIndications===''||
+            this.medicineInfo.medicineTaboo===''||
+            this.medicineInfo.isPrescriptionMedicine===''||
+            this.medicineInfo.isMedicalInsuranceMedicine===''||
+            this.medicineInfo.medicineImage===''){
                 ElMessage.error('请填写完整信息！');
                 return false;
             }else{
@@ -244,13 +244,14 @@ export default {
             console.log("提交")
             if(this.check()) {
                 console.log(this.modified);
-                this.medicineInfo.is_medical_insurance_medicine = this.is_medical_insurance_medicine ? '是' : '否';
-                this.medicineInfo.is_prescription_medicine = this.is_prescription_medicine ? '是' : '否';
-                console.log(this.medicineInfo.is_medical_insurance_medicine);
-                console.log(this.medicineInfo.is_prescription_medicine);
+                this.medicineInfo.isMedicalInsuranceMedicine = this.is_medical_insurance_medicine ? '是' : '否';
+                this.medicineInfo.isPrescriptionMedicine = this.is_prescription_medicine ? '是' : '否';
+                console.log(this.medicineInfo.isMedicalInsuranceMedicine);
+                console.log(this.medicineInfo.isPrescriptionMedicine);
+                console.log(this.medicineInfo)
                 axios.post("/spring/api/v1/CheckService/check/medicine", this.medicineInfo)
                     .then(response => {
-                        if (response.data.data.status) {
+                        if (response.data.errorCode==200) {
                             ElMessage.success('修改成功');
                             console.log("Successfully modify medicine data:" + response.data.data.message);
                         } else {
@@ -276,20 +277,24 @@ export default {
             this.medicineInfo[this.editingFieldKey] = this.modified;
             console.log(this.editingFieldKey)
             this.centerDialogVisible = false;
-        }
+        },
     },
     created() {
         axios
-            .get("/spring/api/v1/CheckService/check/medicine",{medicine_id:this.$route.query.medicine_id})
+            .get("/spring/api/v1/CheckService/check/medicine",{
+                params:{
+                    medicineId:this.$route.query.medicine_id
+                }
+            })
             .then(response => {
-                if (response.data.data.status) {
+                if (response.data.errorCode==200) {
                     ElMessage.success('获取药品信息成功');
                     console.log("Successfully get medicine data");
                     console.log(response.data.data.medicineDetail);
                     this.medicineInfo = response.data.data.medicineDetail;
-                    this.imageUrl=this.medicineInfo.medicine_image;//图片初始化
-                    this.is_medical_insurance_medicine=this.medicineInfo.is_medical_insurance_medicine.includes('是');
-                    this.is_prescription_medicine=this.medicineInfo.is_prescription_medicine.includes('是');
+                    this.imageUrl=this.medicineInfo.medicineImage;//图片初始化
+                    this.is_medical_insurance_medicine=this.medicineInfo.isMedicalInsuranceMedicine=='是';
+                    this.is_prescription_medicine=this.medicineInfo.isPrescriptionMedicine=='是';
                 } else {
                     console.error("Error getting medicine data:", response.data.errorCode);
                     ElMessage.error('获取失败：' + response.data.errorCode)
