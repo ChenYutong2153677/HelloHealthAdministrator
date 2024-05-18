@@ -167,6 +167,8 @@ export default{
             })
             .then((res)=> {
                 this.report_list= res.data.data.report_list;
+                console.log("report_list:")
+                console.log(this.report_list)
                     
             })
 
