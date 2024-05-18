@@ -135,12 +135,12 @@ export default{
                 }
             })
             .then((res)=> {
-                report_info.postId=res.data.data.postId;
-                report_info.postTitle=res.data.data.postTitle;
-                report_info.floorNumber=res.data.data.floorNumber;
+                report_info.postId=res.data.data.post_id;
+                report_info.postTitle=res.data.data.post_title;
+                report_info.floorNumber=res.data.data.floor_number;
                 report_info.content=res.data.data.content;
-                report_info.reportRespond=res.data.data.reportRespond;
-                report_info.reportReason=res.data.data.reportReason;
+                report_info.reportRespond=res.data.data.report_respond;
+                report_info.reportReason=res.data.data.report_reason;
             })
             .then(()=>{
                  console.log(report_info);

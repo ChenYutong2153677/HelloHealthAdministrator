@@ -179,7 +179,7 @@ export default {
             console.log("我更新了！")
             this.isLoading = true
             axios({
-                url: "/spring/api/v1/CheckService/check/medicineList",
+                url: "/spring/api/v1/CheckService/check/medicine-list",
                 method: "get",
             }).then((res) => {
                 console.log("已获取到数据");

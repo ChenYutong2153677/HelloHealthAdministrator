@@ -64,11 +64,11 @@
         </el-form-item>
      
         <el-form-item  v-if="is_checked" label="处理时间:">
-             {{report_info.report_back_time}}
+             {{report_info.reportBackTime}}
         </el-form-item>
 
         <el-form-item  v-if="is_checked" label="处理结果:">
-             {{report_info.report_respond}}
+             {{report_info.reportRespond}}
         </el-form-item>
 
   
@@ -170,8 +170,9 @@ export default{
     },
     created(){
         
-        this.check_info.report_id=this.report_info.report_id
-        
+        this.check_info.report_id=this.report_info.reportId
+        console.log("report_info")
+        console.log(this.report_info)
     }
 
 

@@ -141,6 +141,8 @@ export default{
                 comment_info.floor_number=res.data.data.floor_number; 
                 comment_info.content=res.data.data.content;    
                 this.selected_comment = comment_info;
+                console.log("selected_comment")
+                console.log(this.selected_comment)
                 this.checkDialogVisible = true
             })
             .catch(error => {
@@ -169,6 +171,8 @@ export default{
                 })
                 .then((res)=> {
                     this.comment_list= res.data.data.comment_list;
+                    console.log("commment_list")
+                    console.log(this.comment_list)
                 })
 
         },

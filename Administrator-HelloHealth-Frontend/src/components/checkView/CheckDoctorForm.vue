@@ -2,11 +2,11 @@
     <el-form label-width="auto" :model="check_info" :rules="doctorrule" ref="doctorform">
  
         <el-form-item label="申请用户:">
-            <UserInfoCardSmall :avatar-url="applydoctor_info.user_portrait" :user-name="applydoctor_info.user_name" :user-id="applydoctor_info.user_id"></UserInfoCardSmall>
+            <UserInfoCardSmall :avatar-url="applydoctor_info.userPortrait" :user-name="applydoctor_info.userName" :user-id="applydoctor_info.userId"></UserInfoCardSmall>
          </el-form-item>
 
          <el-form-item label="申请时间:">
-            {{ applydoctor_info.submit_time }}
+            {{ applydoctor_info.submitTime }}
         </el-form-item>
           
          <el-form-item label="执业医师资格证:">
@@ -38,7 +38,7 @@
 
 
          <el-form-item v-if="is_checked" label="医生所在医院级别:">
-            {{applydoctor_info.hospital_rank}}
+            {{applydoctor_info.hospitalRank}}
              
          </el-form-item>
 
@@ -56,8 +56,8 @@
         </el-form-item>
 
         <el-form-item v-if="is_checked" label="是否通过:">
-            <span v-if="applydoctor_info.review_status==1">通过</span>
-            <span v-if="applydoctor_info.review_status==0">不通过</span>
+            <span v-if="applydoctor_info.reviewStatus==1">通过</span>
+            <span v-if="applydoctor_info.reviewStatus==0">不通过</span>
         </el-form-item>
 
          
@@ -66,11 +66,11 @@
         </el-form-item>
      
         <el-form-item  v-if="is_checked" label="审核时间:">
-             {{applydoctor_info.review_time}}
+             {{applydoctor_info.reviewTime}}
         </el-form-item>
 
         <el-form-item  v-if="is_checked" label="审核原因:">
-             {{applydoctor_info.review_reason}}
+             {{applydoctor_info.reviewReason}}
         </el-form-item>
 
   
