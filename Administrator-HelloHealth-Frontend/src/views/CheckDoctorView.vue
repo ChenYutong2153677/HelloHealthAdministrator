@@ -117,6 +117,8 @@ export default{
     methods:
     {
         check(applydoctor_info){
+            console.log("applydoctor_info")
+            console.log(applydoctor_info)
             axios.get("/spring/api/v1/CheckService/check/doctor/detail",{
                 params:{
                     apply_id:applydoctor_info.applyId,
@@ -129,7 +131,7 @@ export default{
                 applydoctor_info.license=res.data.data.license; 
                 applydoctor_info.title=res.data.data.title; 
                 applydoctor_info.department=res.data.data.department; 
-                applydoctor_info.hospital_rank=res.data.data.hospital_rank; 
+                applydoctor_info.hospitalRank=res.data.data.hospital_rank; 
             })
             .then(()=>{
                 
@@ -150,7 +152,7 @@ export default{
         },
         display(){
             axios
-                .get("/spring/api/v1/CheckServive/check/doctor/sortBy", {
+                .get("/spring/api/v1/CheckService/check/doctor/sortBy", {
                     params:{
                         type:this.type_sort.type,
                         //admin_id:localStorage.getItem("adminId")

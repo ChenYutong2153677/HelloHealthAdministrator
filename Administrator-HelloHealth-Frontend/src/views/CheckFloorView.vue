@@ -159,11 +159,13 @@ export default{
             this.display();
         },
         display(){
+
             axios.get("/spring/api/v1/CheckService/check/floor/sortBy", {
                     params:{
                         type:this.type_sort.type,
                         // admin_id:localStorage.getItem("adminId")
                     }
+
                 })
                 .then((res)=> {
                     this.comment_list= res.data.data.comment_list;

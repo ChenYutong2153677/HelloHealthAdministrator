@@ -145,7 +145,7 @@ export default{
             reason:"",
             doctor_title:"",
             doctor_department:"",
-            doctor_hospital_rank:"",
+            doctor_hospital_rank:""
             // admin_id:localStorage.getItem("adminId"),
         },
     }),
@@ -156,6 +156,8 @@ export default{
             axios.post("/spring/api/v1/CheckService/check/doctor/submit",this.check_info)
             .then((res)=> {
             let responseObj = res.data;
+            console.log("submitresponse:")
+            console.log(res)
             if(responseObj.errorCode!==200) {
                 ElMessage.error('审核信息发送失败，错误码：' + responseObj.errorCode);
                 this.$emit('closeMe');
@@ -196,9 +198,9 @@ export default{
     created()
     {
         console.log(this.applydoctor_info)
-        this.check_info.apply_id=this.applydoctor_info.apply_id;
+        this.check_info.apply_id=this.applydoctor_info.applyId;
         console.log(this.check_info)
-        this.check_info.user_id=this.applydoctor_info.user_id;
+        this.check_info.user_id=this.applydoctor_info.userId;
     }
 
 
