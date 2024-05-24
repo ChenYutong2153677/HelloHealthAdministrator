@@ -486,7 +486,7 @@ export default {
             formData.append("medicine_img", file);
 
             //将图片以formdata形式上传，后端返回图片url，再将url赋值给medicine_image
-            axios.post('/api/Forum/ImgUpload', formData, {
+            axios.post('/spring/api/v1/forumService/forum/images', formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data'
                 }

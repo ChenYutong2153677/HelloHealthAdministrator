@@ -74,11 +74,11 @@ export default {
             this.delete_dialog_visible = false;
         },
         deleteMedicine() {
-            axios.delete('/spring/api/v1/CheckService/check/medicine' ,{ medicine_id:this.medicine.medicineId})
+            axios.delete('/spring/api/v1/CheckService/check/medicine' ,{ params:{medicineId:this.medicine.medicineId}})
                 .then((res) => {
                     this.delete_dialog_visible = false;
                     console.log(res);
-                    if (res.data.data.status) {
+                    if (res.data.errorCode) {
                         ElMessage.success("删除成功!");
                         console.log(res.data.data.status);
                         this.$emit("deletesuccess", true);
