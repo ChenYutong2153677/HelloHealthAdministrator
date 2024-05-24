@@ -28,7 +28,7 @@
 
     
 
-    <el-table :data="apply_list" border style="width: 100%" height="400" empty-text="暂无医生">
+    <el-table :data="apply_list" border style="width: 100% ;height:300px " empty-text="暂无医生">
         
         <el-table-column label="申请用户" width="200" align="center">
             <template #default="scope">

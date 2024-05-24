@@ -571,19 +571,24 @@ export default {
         submitNewInfo() {
             //当所有必填项都不为空时，才提交数据
             if(this.checkRequired()) {
+                this.medicine.medicine_image="1"
+                this.medicine.is_medical_insurance_medicine=this.medicine.is_medical_insurance_medicine==true?"是":"否"
+                this.medicine.is_prescription_medicine=this.medicine.is_prescription_medicine==true?"是":"否"
+                console.log("medicine")
+                console.log(this.medicine)
                 axios.put('/spring/api/v1/CheckService/check/medicine', this.medicine)
                     .then(response => {
-                        if (response.data.data.status) {
+                        // if (response.data.errorCode) {
                             console.log("Successfully submitted medicine data:", response.data.data.message);
                             console.log(this.medicine);
                             ElMessage({
                                 message: '添加成功',
                                 type: 'success'
                             });
-                        } else {
-                            console.error("Error submitting medicine data:", response.data.errorCode);
-                            ElMessage.error('添加失败：' + response.data.errorCode)
-                        }
+                        // } else {
+                        //     console.error("Error submitting medicine data:", response.data.errorCode);
+                        //     ElMessage.error('添加失败：' + response.data.errorCode)
+                        // }
                     })
                     .catch(error => {
                         console.error(error);

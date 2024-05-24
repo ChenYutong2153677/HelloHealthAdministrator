@@ -16,7 +16,7 @@
     </el-tabs>
 
     <el-table :data="report_list" border style="width: 100%" height="400" empty-text="暂无举报内容">
- 
+
 
         <el-table-column label="发布用户" :width="display_width" align="center">
             <template #default="scope">
