@@ -178,9 +178,9 @@ export default{
              
         },
         AiCheck(comment_content){
-            //截取前10个字符
-            if(comment_content.length>10){
-                comment_content=comment_content.substring(0,10);
+            //截取前20个字符
+            if(comment_content.length>20){
+                comment_content=comment_content.substring(0,20);
             }
             axios.get("/api/v1/aiService/check/"+comment_content)
                 .then((res)=> {
