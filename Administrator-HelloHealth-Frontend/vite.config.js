@@ -20,7 +20,12 @@ export default defineConfig({
         target: 'http://175.24.176.248:8070',
         changeOrigin: true,
         rewrite: (path) => path.replace(/^\/spring/, '')
-      }
+      },
+      '/api': {
+        target: 'http://8.130.78.60:18088',
+        changeOrigin: true,
+        pathRewrite: { '^/api': '' },
+      },
     },
     port: 5172
   }
